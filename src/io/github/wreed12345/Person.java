@@ -3,6 +3,7 @@ package io.github.wreed12345;
 import java.util.ArrayList;
 
 public class Person {
+	//need to make this manageable across threads
 	private ArrayList<String> emotions = new ArrayList<>();
 	private int age;
 	private String name;

@@ -1,4 +1,7 @@
-package io.github.wreed12345;
+package io.github.wreed12345.statements;
+
+import io.github.wreed12345.Person;
+import io.github.wreed12345.Util;
 
 public class Name extends Phrase{
 

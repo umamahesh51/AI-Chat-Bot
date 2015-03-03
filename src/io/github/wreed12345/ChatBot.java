@@ -1,5 +1,10 @@
 package io.github.wreed12345;
 
+import io.github.wreed12345.statements.Age;
+import io.github.wreed12345.statements.Emotion;
+import io.github.wreed12345.statements.Name;
+import io.github.wreed12345.statements.Phrase;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,9 +24,9 @@ public class ChatBot {
 		Person person = new Person();
 		QuestionAsker qa = new QuestionAsker();//.run();
 		new Thread(qa).start();
+		
 		while (scanner.hasNextLine()) {
 			String enteredWord = scanner.nextLine();
-			System.out.println(qa.isReady());
 
 			// if all caps yell at user
 
@@ -35,5 +40,9 @@ public class ChatBot {
 							break PHRASE;
 						}
 		}
+	}
+	
+	private enum Mode {
+		ASKING, QUESTIONING;
 	}
 }
