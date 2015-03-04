@@ -39,6 +39,8 @@ public class QuestionAsker implements Runnable{
 			
 			//dont spam the loop stalling a second should be ok
 			try {
+				//get rid of wait, considered an 'old' method of stalling thread,
+				//need java concurrency in practice
 				wait(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
