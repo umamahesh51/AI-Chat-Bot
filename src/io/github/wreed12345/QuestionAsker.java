@@ -6,7 +6,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class QuestionAsker implements Runnable{
 	
-	private volatile boolean questionReady;
+	//is this needed?
+	private volatile boolean questioning;
 	private long time = 0;
 	private AtomicLong startTime = new AtomicLong(0);
 	private final long intermediateTime = 10000;//10 seconds
@@ -23,11 +24,17 @@ public class QuestionAsker implements Runnable{
 		startTime.set(System.currentTimeMillis());
 		while (true) {
 			time = System.currentTimeMillis();
-			if(time - startTime.get() > intermediateTime) {
-				questionReady = true;
+			//if 10 seconds is up ask a question
+			if((time - startTime.get() > intermediateTime) && !questioning) {
 				startTime.set(System.currentTimeMillis());
-				
-				
+				questioning = true;
+				System.out.println("ask a question");
+				//TODO: ask a question
+			}
+			//if 20 seconds disengage question mode and say something
+			if((time - startTime.get() > 20000)){
+				questioning = false;
+				System.out.println("no longer question");
 			}
 			
 			//dont spam the loop stalling a second should be ok
@@ -40,11 +47,11 @@ public class QuestionAsker implements Runnable{
 	}
 	
 	/**
-	 * True once 10 seconds has occurred since last input
-	 * @return
+	 * True once designated time interval has ran out. (10 seconds)
+	 * Disengages after 30 seconds of no reply.
 	 */
-	public boolean isReady() {
-		return questionReady;
+	public boolean isQuestioning() {
+		return questioning;
 	}
 	
 	/**
