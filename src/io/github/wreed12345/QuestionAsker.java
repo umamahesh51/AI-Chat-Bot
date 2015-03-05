@@ -26,22 +26,25 @@ public class QuestionAsker implements Runnable{
 			time = System.currentTimeMillis();
 			//if 10 seconds is up ask a question
 			if((time - startTime.get() > intermediateTime) && !questioning) {
-				startTime.set(System.currentTimeMillis());
 				questioning = true;
-				System.out.println("ask a question");
+				System.out.println("<todo> ask a question");
+				resetTime();
 				//TODO: ask a question
 			}
 			//if 20 seconds disengage question mode and say something
 			if((time - startTime.get() > 20000)){
 				questioning = false;
-				System.out.println("no longer question");
+				System.out.println("<todo>cease asking question");
+				resetTime();
 			}
 			
 			//dont spam the loop stalling a second should be ok
 			try {
 				//get rid of wait, considered an 'old' method of stalling thread,
 				//need java concurrency in practice
-				wait(1000);
+				synchronized(this){
+					wait(1000);
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

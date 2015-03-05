@@ -1,4 +1,4 @@
-package io.github.wreed12345;
+package io.github.wreed12345.util;
 
 public class Util {
 	public static final char[] VOWELS = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };

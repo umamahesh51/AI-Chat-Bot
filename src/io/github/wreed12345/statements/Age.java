@@ -1,7 +1,7 @@
 package io.github.wreed12345.statements;
 
 import io.github.wreed12345.Person;
-import io.github.wreed12345.Util;
+import io.github.wreed12345.util.Util;
 
 public class Age extends Phrase{
 
