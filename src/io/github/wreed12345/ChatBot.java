@@ -4,7 +4,9 @@ import io.github.wreed12345.statements.Age;
 import io.github.wreed12345.statements.Emotion;
 import io.github.wreed12345.statements.Name;
 import io.github.wreed12345.statements.Phrase;
+import io.github.wreed12345.util.OutputOverrider;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,6 +15,12 @@ public class ChatBot {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<Phrase> phrases = new ArrayList<Phrase>();
+		
+		//change output
+		PrintStream origOut = System.out;
+	    PrintStream interceptor = new OutputOverrider(origOut);
+	    System.setOut(interceptor);
+	    System.out.println("AI Chat Bot started...");
 
 		Phrase name = new Name();
 		Phrase age = new Age();
@@ -39,6 +47,7 @@ public class ChatBot {
 							System.out.println(p.response(person));
 							break PHRASE;
 						}
+			qa.resetTime();
 		}
 	}
 	
