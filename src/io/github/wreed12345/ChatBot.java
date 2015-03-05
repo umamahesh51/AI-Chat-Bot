@@ -48,6 +48,9 @@ public class ChatBot {
 							break PHRASE;
 						}
 			qa.resetTime();
+			if(qa.isNotAsking()) {
+				qa.startAsking();
+			}
 		}
 	}
 	

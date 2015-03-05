@@ -6,8 +6,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class QuestionAsker implements Runnable{
 	
+	//booleans are atomic already woop woop
 	//is this needed?
 	private volatile boolean questioning;
+	private volatile boolean stopAsking = false;//volatile so other threads can see the new value
 	private long time = 0;
 	private AtomicLong startTime = new AtomicLong(0);
 	private final long intermediateTime = 10000;//10 seconds
@@ -25,16 +27,17 @@ public class QuestionAsker implements Runnable{
 		while (true) {
 			time = System.currentTimeMillis();
 			//if 10 seconds is up ask a question
-			if((time - startTime.get() > intermediateTime) && !questioning) {
+			if((time - startTime.get() > intermediateTime) && !questioning && !stopAsking) {
 				questioning = true;
 				System.out.println("<todo> ask a question");
 				resetTime();
 				//TODO: ask a question
 			}
 			//if 20 seconds disengage question mode and say something
-			if((time - startTime.get() > 20000)){
+			if((time - startTime.get() > 20000) && !stopAsking){
 				questioning = false;
 				System.out.println("<todo>cease asking question");
+				stopAsking = true;
 				resetTime();
 			}
 			
@@ -57,6 +60,20 @@ public class QuestionAsker implements Runnable{
 	 */
 	public boolean isQuestioning() {
 		return questioning;
+	}
+	
+	/**
+	 * @return true if 30 seconds total has occured since the last time the user said anything
+	 */
+	public boolean isNotAsking() {
+		return stopAsking;
+	}
+	
+	/**
+	 * Should be used once the user has started talking again after a delay
+	 */
+	public void startAsking() {
+		stopAsking = false;
 	}
 	
 	/**
