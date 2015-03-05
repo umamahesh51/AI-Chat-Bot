@@ -6,13 +6,26 @@ public class Person {
 	//need to make this manageable across threads
 	private ArrayList<String> emotions = new ArrayList<>();
 	private int age;
-	private String name;
-	private Gender gender;
-	private String dogsName;
+	private String name = "unknown";
+	private Gender gender = Gender.UNKOWN;
+	private String dogsName = "unkown";
 	private ArrayList<Person> familyMembers = new ArrayList<>();
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Profile for " + name + "\n");
+		sb.append("Age:\t\t" + age + "\n");
+		sb.append("Gender:\t\t" + gender + "\n");
+		sb.append("Dog's name:\t" + dogsName + "\n");
+		for(String s : emotions) 
+			sb.append("Emotion:\t" + s + "\n");
+		for(Person p : familyMembers) 
+			sb.append("Family Member:\t" + p.getName() + "\n");
+		return sb.toString();
+	}
+	
 	public enum Gender {
-		MALE, FEMALE;
+		MALE, FEMALE, UNKOWN;
 	}
 	
 	public ArrayList<String> getEmotions() {
