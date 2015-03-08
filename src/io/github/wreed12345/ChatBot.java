@@ -17,8 +17,8 @@ public class ChatBot {
 	    System.out.println("AI Chat Bot started...");
 
 		Person person = new Person();
-		QuestionAsker qa = new QuestionAsker();//.run();
-		new Thread(qa).start();
+		//QuestionAsker qa = new QuestionAsker();//.run();
+		//new Thread(qa).start();
 		
 		InputAnalyzer ia = new InputAnalyzer(person);
 		
@@ -32,10 +32,10 @@ public class ChatBot {
 			
 			ia.handleText(enteredWord);
 			
-			qa.resetTime();
-			if(qa.isNotAsking()) {
-				qa.startAsking();
-			}
+//			qa.resetTime();
+//			if(qa.isNotAsking()) {
+//				qa.startAsking();
+//			}
 		}
 		scanner.close();
 	}
