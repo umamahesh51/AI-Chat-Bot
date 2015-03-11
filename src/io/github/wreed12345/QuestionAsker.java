@@ -27,6 +27,7 @@ public class QuestionAsker implements Runnable{
 		while (true) {
 			time = System.currentTimeMillis();
 			//if 10 seconds is up ask a question
+			//probably should synchronize so not acting on stale values
 			if((time - startTime.get() > intermediateTime) && !questioning && !stopAsking) {
 				questioning = true;
 				System.out.println("<todo> ask a question");
@@ -34,6 +35,7 @@ public class QuestionAsker implements Runnable{
 				//TODO: ask a question
 			}
 			//if 20 seconds disengage question mode and say something
+			//probably should synchronize so not acting on stale values
 			if((time - startTime.get() > 20000) && !stopAsking){
 				questioning = false;
 				System.out.println("<todo>cease asking question");
